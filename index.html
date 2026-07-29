@@ -1,874 +1,396 @@
 <!DOCTYPE html>
-<html lang="id" class="dark scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bambang Yutriono - Network Engineer | IT Support | Project Admin | Document Controller</title>
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        pastel: {
-                            teal: '#a8e6cf',
-                            mint: '#d8f3dc',
-                            sky: '#b8c0ff',
-                            lavender: '#c8b6ff',
-                            coral: '#ffaaa5',
-                            apricot: '#ffd3b6',
-                            sand: '#f7d6d0'
-                        },
-                        darkbg: '#0f172a',
-                        darkcard: '#1e293b'
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Google Font & FontAwesome Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <title>Bambang Yutriono - Multidisciplinary Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        * { transition: background-color 0.25s ease, border-color 0.25s ease; }
-        
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #fdf6f0;
+            --text-color: #2d3436;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.9);
+            --primary-pastel: #ff7e67; /* Coral */
+            --secondary-pastel: #7ec8b6; /* Teal */
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --nav-bg: rgba(255, 255, 255, 0.85);
         }
 
-        /* Glassmorphism Classes */
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --bg-color: #1e1e24;
+            --text-color: #f0ece2;
+            --glass-bg: rgba(30, 30, 36, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary-pastel: #e06c58;
+            --secondary-pastel: #5aa597;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --nav-bg: rgba(30, 30, 36, 0.9);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); display: flex; flex-direction: column; align-items: center; padding-top: 80px; min-height: 100vh; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: var(--nav-bg); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+        }
+        nav .brand { font-weight: 700; font-size: 1.2rem; color: var(--primary-pastel); }
+        nav .links { display: flex; flex-wrap: wrap; gap: 15px; align-items: center; }
+        nav .links a { text-decoration: none; color: var(--text-color); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        nav .links a:hover { color: var(--primary-pastel); }
+        .theme-toggle-nav {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 50px;
+            padding: 8px 15px; cursor: pointer; font-size: 0.85rem; color: var(--text-color);
+        }
+
+        /* --- CONTAINER --- */
+        .container { max-width: 1000px; width: 100%; display: flex; flex-direction: column; gap: 30px; padding: 0 20px 40px; }
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border);
+            border-radius: 24px; padding: 35px; box-shadow: 0 10px 30px var(--shadow-color);
         }
+        section { scroll-margin-top: 80px; }
 
-        .dark .glass-card {
-            background: rgba(30, 41, 59, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        /* --- HOME --- */
+        #home { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        #home img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--glass-border); object-fit: cover; margin-bottom: 20px; background: var(--secondary-pastel); }
+        #home h1 { font-size: 2.5rem; font-weight: 700; }
+        #home .subtitle { font-size: 1.1rem; color: var(--primary-pastel); font-weight: 600; margin: 5px 0; }
+        
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; width: 100%; margin-top: 25px;
         }
+        .stat-box { background: var(--secondary-pastel); padding: 15px; border-radius: 16px; text-align: center; color: #fff; }
+        .stat-box .num { font-size: 1.8rem; font-weight: 700; display: block; }
 
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-        }
+        /* --- SECTIONS --- */
+        h2 { font-size: 1.8rem; margin-bottom: 20px; position: relative; display: inline-block; }
+        h2::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 50px; height: 4px; background: var(--primary-pastel); border-radius: 10px; }
 
-        .dark .glass-nav {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(51, 65, 85, 0.6);
-        }
+        /* --- EXPERIENCE & PROJECTS --- */
+        .timeline-item { position: relative; padding-left: 25px; margin-bottom: 30px; border-left: 3px solid var(--primary-pastel); }
+        .timeline-item:last-child { border-left: 3px solid transparent; margin-bottom: 0; }
+        .timeline-item h3 { font-size: 1.2rem; color: var(--primary-pastel); }
+        .timeline-item .company { font-weight: 600; }
+        .timeline-item .date { font-size: 0.85rem; opacity: 0.6; display: block; margin-bottom: 8px; }
+        .timeline-item ul { list-style: none; margin-top: 8px; }
+        .timeline-item ul li { margin-bottom: 5px; display: flex; gap: 10px; font-size: 0.95rem; }
+        .timeline-item ul li::before { content: '▹'; color: var(--secondary-pastel); font-weight: bold; }
+        .highlight-text { color: var(--primary-pastel); font-weight: 600; }
 
-        /* Subtle Pastel Ambient Orbs */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.45;
-            z-index: 0;
-            pointer-events: none;
-        }
+        /* --- SKILLS --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .skill-box { background: var(--secondary-pastel); padding: 15px; border-radius: 16px; text-align: center; color: #fff; font-weight: 500; }
+        .skill-box i { margin-right: 8px; }
+        .skill-box.network { background: #4a8c82; }
+        .skill-box.it { background: #e06c58; }
+        .skill-box.admin { background: #5aa597; }
+        .skill-box.tools { background: #d67b66; }
 
-        .dark .orb {
-            opacity: 0.25;
+        /* --- PHOTO GALLERY (CAROUSEL) --- */
+        .carousel-container {
+            position: relative; width: 100%; max-width: 800px; margin: 20px auto; overflow: hidden; border-radius: 16px;
+            background: var(--glass-bg); padding: 10px;
         }
+        .carousel-slides { display: flex; transition: transform 0.5s ease-in-out; }
+        .carousel-slides img {
+            width: 100%; height: 400px; object-fit: cover; flex-shrink: 0; border-radius: 12px;
+        }
+        .carousel-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8); color: #000; border: none;
+            border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.2rem; transition: 0.3s;
+        }
+        .carousel-btn:hover { background: var(--secondary-pastel); color: #fff; }
+        .prev { left: 20px; } .next { right: 20px; }
+        .dots { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        .dot { width: 12px; height: 12px; background: var(--glass-border); border-radius: 50%; cursor: pointer; transition: 0.3s; }
+        .dot.active { background: var(--primary-pastel); transform: scale(1.2); }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* --- DOWNLOAD CV --- */
+        .cv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 15px; }
+        .cv-btn {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 15px; border-radius: 16px; background: var(--glass-bg); border: 1px solid var(--glass-border);
+            color: var(--text-color); text-decoration: none; font-weight: 500; transition: 0.2s;
         }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
+        .cv-btn:hover { transform: translateY(-3px); }
+        .cv-btn.master { background: var(--primary-pastel); color: #fff; }
+        .cv-btn.master:hover { background: #d65a45; color: #fff; }
+
+        /* --- CONTACT (BRAND COLORS) --- */
+        .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px; }
+        .cta-btn {
+            text-decoration: none; padding: 15px 30px; border-radius: 50px; font-weight: 600;
+            background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-color);
+            display: flex; align-items: center; gap: 10px; transition: transform 0.2s;
         }
-        .dark ::webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        .dark ::webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
+        .cta-btn:hover { transform: translateY(-3px); color: #fff; }
+        
+        .cta-btn.whatsapp:hover { background: #25D366; border-color: #25D366; }
+        .cta-btn.email:hover { background: #D44638; border-color: #D44638; }
+        .cta-btn.linkedin:hover { background: #0A66C2; border-color: #0A66C2; }
+
+        @media (max-width: 768px) {
+            nav .links { justify-content: center; width: 100%; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .carousel-slides img { height: 250px; }
         }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-darkbg text-slate-800 dark:text-slate-100 min-h-screen flex flex-col relative overflow-x-hidden antialiased">
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="brand"><i class="fas fa-code"></i> Bambang Yutriono</div>
+        <div class="links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#download">CV</a>
+            <a href="#contact">Contact</a>
+            <button class="theme-toggle-nav" id="themeToggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
 
-    <!-- Ambient Glowing Pastel Background Orbs -->
-    <div class="orb w-96 h-96 bg-teal-300 dark:bg-teal-700 -top-20 -left-20"></div>
-    <div class="orb w-96 h-96 bg-indigo-300 dark:bg-indigo-800 top-1/3 -right-20"></div>
-    <div class="orb w-80 h-80 bg-amber-200 dark:bg-amber-700 bottom-1/4 -left-20"></div>
-
-    <header class="sticky top-0 z-50 w-full glass-nav px-4 lg:px-8 py-3.5">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="container">
+        <!-- HOME -->
+        <section id="home" class="glass-card">
+            <!-- Ganti src="profil.png" di bawah dengan link direct image foto profil Anda -->
+            <img src="profil.png" alt="Bambang Yutriono" id="profileImage">
+            <h1>Bambang Yutriono</h1>
+            <div class="subtitle">Telecommunication & Network Engineer | IT Support | Project Admin & Doc Controller</div>
+            <p style="opacity: 0.8; margin-top: 10px;"><i class="fas fa-map-marker-alt"></i> Balikpapan, Kalimantan Timur (Bersedia Relokasi)</p>
             
-            <!-- Brand / Logo -->
-            <a href="#hero" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-400 via-sky-400 to-indigo-400 flex items-center justify-center text-slate-900 font-extrabold text-lg shadow-md group-hover:scale-105 transition-transform">
-                    BY
-                </div>
-                <div>
-                    <span class="font-bold text-base leading-tight block tracking-tight">Bambang Yutriono</span>
-                    <span class="text-xs text-teal-600 dark:text-teal-400 font-medium">IT & Telecom Infrastructure Specialist</span>
-                </div>
-            </a>
-
-            <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center gap-1 bg-slate-200/60 dark:bg-slate-800/60 p-1.5 rounded-full border border-slate-300/50 dark:border-slate-700/50 text-xs font-semibold">
-                <a href="#projects" class="px-4 py-2 rounded-full hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm transition-all">Projects</a>
-                <a href="#skills" class="px-4 py-2 rounded-full hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm transition-all">Skills & Certs</a>
-                <a href="#experience" class="px-4 py-2 rounded-full hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm transition-all">Experience</a>
-                <a href="#about" class="px-4 py-2 rounded-full hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm transition-all">About Me</a>
-            </nav>
-
-            <!-- Actions Header Button -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <button id="theme-toggle" aria-label="Toggle Dark Mode" class="w-10 h-10 rounded-xl bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-amber-400 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center transition-colors">
-                    <i id="theme-icon" class="fa-solid fa-moon"></i>
-                </button>
-                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-teal-400 text-white dark:text-slate-950 font-bold text-xs shadow-md hover:opacity-90 transition-all">
-                    <i class="fa-solid fa-paper-plane"></i>
-                    <span>Contact Me</span>
-                </a>
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" aria-label="Open Mobile Menu" class="md:hidden w-10 h-10 rounded-xl bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200">
-                    <i class="fa-solid fa-bars text-lg"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Dropdown Menu -->
-        <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 border-t border-slate-200 dark:border-slate-800 mt-3 space-y-2 text-sm font-semibold">
-            <a href="#projects" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">🚀 Projects</a>
-            <a href="#skills" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">⚡ Skills & Certifications</a>
-            <a href="#experience" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">💼 Work Experience</a>
-            <a href="#about" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">👤 About Me</a>
-            <a href="#contact" class="block px-3 py-2.5 rounded-xl bg-teal-500 text-slate-950 text-center font-bold">📩 Contact / Connect</a>
-        </div>
-    </header>
-
-    <!-- Main Container -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-20 relative z-10">
-
-        <section id="hero" class="pt-4 lg:pt-8">
-            <div class="glass-card rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-xl border border-white/60 dark:border-slate-800">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    
-                    <!-- Hero Info -->
-                    <div class="lg:col-span-8 space-y-6">
-                        
-                        <!-- Location & Availability Badge -->
-                        <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-100 text-teal-800 dark:bg-teal-950/80 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
-                                <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
-                                Ready for Nationwide Relocation / Roster / Shift
-                            </span>
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
-                                <i class="fa-solid fa-location-dot text-slate-400"></i>
-                                Balikpapan, Kalimantan Timur
-                            </span>
-                        </div>
-
-                        <!-- Main Headline & Role Positioning -->
-                        <div class="space-y-3">
-                            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
-                                Delivering Reliable Network Operations & Project Governance.
-                            </h1>
-                            <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
-                                Professional dengan pengalaman <strong class="text-teal-600 dark:text-teal-400">10+ tahun</strong> di sektor Telekomunikasi, Pertambangan, Minyak & Gas, serta Enterprise.
-                            </p>
-                        </div>
-
-                        <!-- 4 Core Role Pillars -->
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                            <div class="p-3 rounded-2xl bg-teal-50/80 dark:bg-slate-800/80 border border-teal-100 dark:border-slate-700 text-center">
-                                <i class="fa-solid fa-network-wired text-teal-600 dark:text-teal-400 text-xl mb-1"></i>
-                                <span class="block text-xs font-bold">Network Engineer</span>
-                            </div>
-                            <div class="p-3 rounded-2xl bg-indigo-50/80 dark:bg-slate-800/80 border border-indigo-100 dark:border-slate-700 text-center">
-                                <i class="fa-solid fa-headset text-indigo-600 dark:text-indigo-400 text-xl mb-1"></i>
-                                <span class="block text-xs font-bold">IT Technical Support</span>
-                            </div>
-                            <div class="p-3 rounded-2xl bg-sky-50/80 dark:bg-slate-800/80 border border-sky-100 dark:border-slate-700 text-center">
-                                <i class="fa-solid fa-list-check text-sky-600 dark:text-sky-400 text-xl mb-1"></i>
-                                <span class="block text-xs font-bold">Project Admin</span>
-                            </div>
-                            <div class="p-3 rounded-2xl bg-amber-50/80 dark:bg-slate-800/80 border border-amber-100 dark:border-slate-700 text-center">
-                                <i class="fa-solid fa-folder-closed text-amber-600 dark:text-amber-400 text-xl mb-1"></i>
-                                <span class="block text-xs font-bold">Document Controller</span>
-                            </div>
-                        </div>
-
-                        <!-- Key Achievements Stats -->
-                        <div class="grid grid-cols-3 gap-4 border-t border-slate-200 dark:border-slate-800 pt-6">
-                            <div>
-                                <span class="block text-2xl sm:text-3xl font-extrabold text-teal-600 dark:text-teal-400">99.5%</span>
-                                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Network Uptime SLA</span>
-                            </div>
-                            <div>
-                                <span class="block text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">200+</span>
-                                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">SLA Tickets Solved</span>
-                            </div>
-                            <div>
-                                <span class="block text-2xl sm:text-3xl font-extrabold text-amber-600 dark:text-amber-400">150+</span>
-                                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Telecom Docs Controlled</span>
-                            </div>
-                        </div>
-
-                        <!-- CTA Buttons -->
-                        <div class="flex flex-wrap items-center gap-3 pt-2">
-                            <a href="https://wa.me/6285349989650?text=Halo%20Pak%20Bambang,%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20peluang%20kerjasama/proyek." target="_blank" class="px-6 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-lg shadow-emerald-500/25 flex items-center gap-2.5 transition-all">
-                                <i class="fa-brands fa-whatsapp text-lg"></i>
-                                <span>Hubungi via WhatsApp</span>
-                            </a>
-                            <a href="mailto:mas.bambang27@gmail.com" class="px-6 py-3.5 rounded-2xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-bold text-sm flex items-center gap-2.5 transition-all">
-                                <i class="fa-regular fa-envelope text-lg"></i>
-                                <span>Kirim Email</span>
-                            </a>
-                        </div>
-
-                    </div>
-
-                    <!-- Hero Avatar / Profile Highlight Card -->
-                    <div class="lg:col-span-4 flex justify-center">
-                        <div class="relative w-full max-w-sm">
-                            <div class="absolute inset-0 bg-gradient-to-tr from-teal-300 via-indigo-300 to-amber-200 dark:from-teal-900 dark:via-indigo-900 dark:to-slate-800 rounded-3xl transform rotate-3 blur-md opacity-70"></div>
-                            <div class="relative glass-card p-6 rounded-3xl border border-white/80 dark:border-slate-700 space-y-4">
-                                <div class="w-full aspect-square rounded-2xl bg-slate-200 dark:bg-slate-800 overflow-hidden relative shadow-inner flex items-center justify-center">
-                                    <img src="https://lh3.googleusercontent.com/d/15GaDDch_0hUq4jsPlM7iKjJUrCFC9kZr" onerror="this.onerror=null; this.src='https://drive.google.com/uc?export=view&id=15GaDDch_0hUq4jsPlM7iKjJUrCFC9kZr';" alt="Bambang Yutriono Profile" class="w-full h-full object-cover">
-                                    <div class="absolute bottom-3 left-3 right-3 bg-slate-900/80 backdrop-blur-md text-white p-2.5 rounded-xl text-xs flex items-center justify-between">
-                                        <span class="font-semibold"><i class="fa-solid fa-award text-amber-400 mr-1"></i> CCNA & MTCNA</span>
-                                        <span class="text-teal-300">Certified</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="space-y-2 text-xs">
-                                    <div class="flex items-center justify-between py-1.5 border-b border-slate-200 dark:border-slate-800">
-                                        <span class="text-slate-500">Sertifikasi Safety:</span>
-                                        <span class="font-bold text-teal-600 dark:text-teal-400">K3 TKBT, WAH, BSS</span>
-                                    </div>
-                                    <div class="flex items-center justify-between py-1.5 border-b border-slate-200 dark:border-slate-800">
-                                        <span class="text-slate-500">Sektor Pengalaman:</span>
-                                        <span class="font-bold">Mining, O&G, Telco</span>
-                                    </div>
-                                    <div class="flex items-center justify-between py-1.5">
-                                        <span class="text-slate-500">SIM Driving:</span>
-                                        <span class="font-bold">SIM A & SIM C</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+            <div class="stats-grid">
+                <div class="stat-box"><span class="num">10+</span>Tahun Pengalaman</div>
+                <div class="stat-box" style="background: var(--primary-pastel);"><span class="num">99.5%</span>Network Availability</div>
+                <div class="stat-box"><span class="num">200+</span>Tech Request SLA</div>
+                <div class="stat-box" style="background: var(--primary-pastel);"><span class="num">150+</span>Dokumen Terkelola</div>
             </div>
         </section>
 
-        <section id="projects" class="space-y-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 flex items-center gap-2">
-                        <i class="fa-solid fa-diagram-project"></i> Portfolio Highlights
-                    </span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Proyek Terkemuka & Implementasi</h2>
-                </div>
-
-                <!-- Category Filter Buttons -->
-                <div class="flex flex-wrap gap-1.5 bg-slate-200/70 dark:bg-slate-800/70 p-1.5 rounded-2xl text-xs font-semibold">
-                    <button class="project-filter-btn px-3 py-1.5 rounded-xl bg-white dark:bg-slate-700 shadow-sm text-teal-600 dark:text-teal-300 active-filter" data-filter="all">Semua Proyek</button>
-                    <button class="project-filter-btn px-3 py-1.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-filter="network">Network & Infra</button>
-                    <button class="project-filter-btn px-3 py-1.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-filter="doc-control">Doc Control & Admin</button>
-                    <button class="project-filter-btn px-3 py-1.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-filter="field-support">Field Support</button>
-                </div>
-            </div>
-
-            <!-- Projects Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <!-- Project 1: Nokia-Indosat Doc Control -->
-                <div class="project-card glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-4 hover:shadow-lg hover:-translate-y-1 transition-all" data-category="doc-control">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
-                                Document Control
-                            </span>
-                            <span class="text-xs text-slate-400 font-medium">2025 – 2026</span>
-                        </div>
-                        <h3 class="text-lg font-bold">Pengelolaan Dokumen Proyek Nokia - Indosat Ooredoo Hutchison</h3>
-                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                            PT Empore Hezer Tama — Bertanggung jawab mengelola &gt;150 dokumen proyek (SIR, PR, ATP, Progress Report, As-Built) selama siklus penyiapan hingga Project Handover sesuai standar telekomunikasi Nokia & Indosat.
-                        </p>
-                    </div>
-                    <div class="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-800">
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">SIR / PR / ATP</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">Handover Docs</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">Surabaya</span>
-                        </div>
-                        <button onclick="openModal('Project Document Control Nokia-Indosat', 'Mengelola kelengkapan administrasi, verifikasi SIR/PR/ATP, serta tracking status revisi dokumen proyek telekomunikasi Nokia Indosat dengan 100% kepatuhan standar audit.')" class="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center justify-center gap-1.5">
-                            <span>Detail Proyek</span>
-                            <i class="fa-solid fa-arrow-right-long text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Project 2: Telecom Tower Commissioning -->
-                <div class="project-card glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-4 hover:shadow-lg hover:-translate-y-1 transition-all" data-category="network field-support">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-teal-100 text-teal-800 dark:bg-teal-950/80 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
-                                Network Lead
-                            </span>
-                            <span class="text-xs text-slate-400 font-medium">PT Tangguh Mandiri</span>
-                        </div>
-                        <h3 class="text-lg font-bold">Pembangunan & Commissioning 2 Tower Telekomunikasi 60M</h3>
-                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                            Berhasil memimpin proyek pembangunan, instalasi Radio Link Microwave, grounding system, power system, serta commissioning dua tower setinggi 60 meter hingga site acceptance lulus tanpa kendala.
-                        </p>
-                    </div>
-                    <div class="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-800">
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">Radio Link</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">Tower 60M</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">Work at Height</span>
-                        </div>
-                        <button onclick="openModal('Pembangunan & Commissioning Tower 60M', 'Memimpin tim teknik dalam pembangunan fisik tower 60 meter, pemasangan microwave antenna, lightning protection, dan commissioning untuk sertifikasi ketersediaan jaringan.')" class="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center justify-center gap-1.5">
-                            <span>Detail Proyek</span>
-                            <i class="fa-solid fa-arrow-right-long text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Project 3: ZTE FTTH Project Supervision -->
-                <div class="project-card glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-4 hover:shadow-lg hover:-translate-y-1 transition-all" data-category="doc-control field-support">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-sky-100 text-sky-800 dark:bg-sky-950/80 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
-                                Project Admin & Supervisor
-                            </span>
-                            <span class="text-xs text-slate-400 font-medium">2023 – 2025</span>
-                        </div>
-                        <h3 class="text-lg font-bold">ZTE-EMR FTTH Rollout & Permit Management</h3>
-                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                            PT Grha Prima Agung — Mengawasi &gt;30 teknisi lapangan dan mengurus perizinan di &gt;50 lokasi proyek. Melakukan review As-Plan Design (APD), Redline Drawing, FAT, PAT, serta Site Acceptance.
-                        </p>
-                    </div>
-                    <div class="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-800">
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">FTTH Rollout</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">50+ Permits</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">APD & Redline</span>
-                        </div>
-                        <button onclick="openModal('ZTE-EMR FTTH Rollout', 'Mengoordinasikan perizinan lokasi dengan pihak setempat, memantau standar pekerjaan kabel serat optik, dan memverifikasi gambar teknis APD/Redline Drawing.')" class="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center justify-center gap-1.5">
-                            <span>Detail Proyek</span>
-                            <i class="fa-solid fa-arrow-right-long text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Project 4: Microwave Link Telkom Bontang Chevron -->
-                <div class="project-card glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-4 hover:shadow-lg hover:-translate-y-1 transition-all" data-category="network">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-indigo-100 text-indigo-800 dark:bg-indigo-950/80 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
-                                Microwave Network
-                            </span>
-                            <span class="text-xs text-slate-400 font-medium">PT Lintasarta</span>
-                        </div>
-                        <h3 class="text-lg font-bold">Radio Link Microwave PTP 1.8M untuk PT Chevron</h3>
-                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                            Instalasi, alignment, dan commissioning Radio Link Microwave Point-to-Point (1.8 Meter) di Telkom Bontang untuk mendukung konektivitas jaringan krusial PT Chevron Indonesia.
-                        </p>
-                    </div>
-                    <div class="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-800">
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">PTP Microwave</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">Telkom Bontang</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">PT Chevron</span>
-                        </div>
-                        <button onclick="openModal('PTP Microwave Link PT Chevron', 'Proyek perakitan dan alignment antena microwave ukuran 1.8 meter dengan presisi tinggi untuk transmisi data berkecepatan tinggi bagi sektor migas Chevron.')" class="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center justify-center gap-1.5">
-                            <span>Detail Proyek</span>
-                            <i class="fa-solid fa-arrow-right-long text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Project 5: BAKTI Kominfo Telecom Deployment -->
-                <div class="project-card glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-4 hover:shadow-lg hover:-translate-y-1 transition-all" data-category="network field-support">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-teal-100 text-teal-800 dark:bg-teal-950/80 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
-                                National Infrastructure
-                            </span>
-                            <span class="text-xs text-slate-400 font-medium">BAKTI Kominfo</span>
-                        </div>
-                        <h3 class="text-lg font-bold">Infrastruktur Telekomunikasi Program BAKTI Indonesia</h3>
-                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                            Penggelaran VSAT (Ku-Band, C-Band, Starlink), Solar Power Systems, Grounding, dan Fiber Termination di area pelosok Kalimantan untuk memperluas akses komunikasi nasional.
-                        </p>
-                    </div>
-                    <div class="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-800">
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">VSAT & Starlink</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">Solar Power</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">Remote Sites</span>
-                        </div>
-                        <button onclick="openModal('Infrastruktur BAKTI Kominfo', 'Implementasi perangkat akses broadband VSAT, installer panel tenaga surya, dan grounding penangkal petir di daerah terpencil Kalimantan.')" class="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center justify-center gap-1.5">
-                            <span>Detail Proyek</span>
-                            <i class="fa-solid fa-arrow-right-long text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Project 6: Mining & Enterprise Managed Services -->
-                <div class="project-card glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-4 hover:shadow-lg hover:-translate-y-1 transition-all" data-category="network doc-control field-support">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
-                                Enterprise Managed Services
-                            </span>
-                            <span class="text-xs text-slate-400 font-medium">Pertambangan & Migas</span>
-                        </div>
-                        <h3 class="text-lg font-bold">Support Jaringan PT Pertamina Hulu KT & PT Berau Coal</h3>
-                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                            Maintenance, troubleshooting incident, PRTG network monitoring, CCTV, dan pelaporan harian/mingguan untuk lokasi tambang batu bara dan blok migas lepas pantai/darat.
-                        </p>
-                    </div>
-                    <div class="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-800">
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">PRTG Monitor</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">SLA Resolution</span>
-                            <span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-medium">Incident Report</span>
-                        </div>
-                        <button onclick="openModal('Managed Services Pertambangan & Migas', 'Memastikan SLA ketersediaan jaringan di PT Berau Coal, PHKT, PT Wilmar Nabati, dan Quest Hotel tetap di atas 99.5% dengan penanganan tiket cepat.')" class="w-full py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 flex items-center justify-center gap-1.5">
-                            <span>Detail Proyek</span>
-                            <i class="fa-solid fa-arrow-right-long text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="skills" class="space-y-6">
-            <div class="space-y-1">
-                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-2">
-                    <i class="fa-solid fa-bolt"></i> Competency Matrix
-                </span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold">Keahlian & Sertifikasi Profesional</h2>
-            </div>
-
-            <!-- Skills Grid Categorized -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                <!-- Skill Block 1: Network & Infra -->
-                <div class="glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800 space-y-4">
-                    <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-700 dark:bg-teal-950 dark:text-teal-300 flex items-center justify-center text-xl shadow-inner">
-                        <i class="fa-solid fa-network-wired"></i>
-                    </div>
-                    <h3 class="font-bold text-base">Infrastruktur & Jaringan</h3>
-                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
-                        <li class="flex items-center justify-between"><span>Cisco & MikroTik Routing/Switching</span> <i class="fa-solid fa-circle-check text-teal-500"></i></li>
-                        <li class="flex items-center justify-between"><span>Fiber Optic (Splicing, OTDR, ODF)</span> <i class="fa-solid fa-circle-check text-teal-500"></i></li>
-                        <li class="flex items-center justify-between"><span>VSAT (C/Ku-Band, Starlink, SCPC)</span> <i class="fa-solid fa-circle-check text-teal-500"></i></li>
-                        <li class="flex items-center justify-between"><span>Microwave PTP (Ceragon, Cambium)</span> <i class="fa-solid fa-circle-check text-teal-500"></i></li>
-                        <li class="flex items-center justify-between"><span>Wireless (Ubiquiti, Mimosa)</span> <i class="fa-solid fa-circle-check text-teal-500"></i></li>
-                    </ul>
-                </div>
-
-                <!-- Skill Block 2: IT Support & Ops -->
-                <div class="glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800 space-y-4">
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 flex items-center justify-center text-xl shadow-inner">
-                        <i class="fa-solid fa-screwdriver-wrench"></i>
-                    </div>
-                    <h3 class="font-bold text-base">IT Technical Support</h3>
-                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
-                        <li class="flex items-center justify-between"><span>PRTG Network Monitoring</span> <i class="fa-solid fa-circle-check text-indigo-500"></i></li>
-                        <li class="flex items-center justify-between"><span>Fault & SLA Incident Management</span> <i class="fa-solid fa-circle-check text-indigo-500"></i></li>
-                        <li class="flex items-center justify-between"><span>Hardware, LAN/WAN, CCTV Repair</span> <i class="fa-solid fa-circle-check text-indigo-500"></i></li>
-                        <li class="flex items-center justify-between"><span>UPS, Rectifier & Battery Bank</span> <i class="fa-solid fa-circle-check text-indigo-500"></i></li>
-                        <li class="flex items-center justify-between"><span>NOC & Service Desk Escalation</span> <i class="fa-solid fa-circle-check text-indigo-500"></i></li>
-                    </ul>
-                </div>
-
-                <!-- Skill Block 3: Doc Control & Admin -->
-                <div class="glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800 space-y-4">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 flex items-center justify-center text-xl shadow-inner">
-                        <i class="fa-solid fa-file-shield"></i>
-                    </div>
-                    <h3 class="font-bold text-base">Project Admin & Doc Control</h3>
-                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
-                        <li class="flex items-center justify-between"><span>SIR, PR & ATP Document Prep</span> <i class="fa-solid fa-circle-check text-amber-500"></i></li>
-                        <li class="flex items-center justify-between"><span>As-Plan Design & Redline Drawings</span> <i class="fa-solid fa-circle-check text-amber-500"></i></li>
-                        <li class="flex items-center justify-between"><span>Site Permit & Vendor Oversight</span> <i class="fa-solid fa-circle-check text-amber-500"></i></li>
-                        <li class="flex items-center justify-between"><span>Daily/Weekly/Monthly Reporting</span> <i class="fa-solid fa-circle-check text-amber-500"></i></li>
-                        <li class="flex items-center justify-between"><span>MS Excel / Word / PowerPoint</span> <i class="fa-solid fa-circle-check text-amber-500"></i></li>
-                    </ul>
-                </div>
-
-                <!-- Skill Block 4: Official Certifications -->
-                <div class="glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800 space-y-4">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 flex items-center justify-center text-xl shadow-inner">
-                        <i class="fa-solid fa-certificate"></i>
-                    </div>
-                    <h3 class="font-bold text-base">Sertifikasi & K3</h3>
-                    <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
-                        <li class="flex items-center justify-between"><span>Cisco CCNA 200-301</span> <span class="text-[10px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 rounded">2023</span></li>
-                        <li class="flex items-center justify-between"><span>MikroTik MTCNA</span> <span class="text-[10px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 rounded">2021</span></li>
-                        <li class="flex items-center justify-between"><span>K3 TKBT Level 2</span> <span class="text-[10px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 rounded">2020</span></li>
-                        <li class="flex items-center justify-between"><span>Work At Height (WAH)</span> <span class="text-[10px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 rounded">2020</span></li>
-                        <li class="flex items-center justify-between"><span>Basic Sea Survival (BSS)</span> <span class="text-[10px] font-bold px-2 py-0.5 bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 rounded">2020</span></li>
-                    </ul>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="experience" class="space-y-6">
-            <div class="space-y-1">
-                <span class="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 flex items-center gap-2">
-                    <i class="fa-solid fa-briefcase"></i> Professional History
-                </span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold">Pengalaman Kerja</h2>
-            </div>
-
-            <!-- Timeline Stack -->
-            <div class="space-y-6 relative before:absolute before:inset-0 before:left-3 sm:before:left-6 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
-
-                <!-- Timeline Item 1 -->
-                <div class="relative pl-8 sm:pl-12 glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800">
-                    <div class="absolute left-1.5 sm:left-4 top-7 -translate-x-1/2 w-4 h-4 rounded-full bg-amber-500 border-4 border-white dark:border-slate-900 shadow"></div>
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                        <div>
-                            <h3 class="font-bold text-lg">Document Controller <span class="text-xs font-semibold text-slate-500">(Project Nokia - Indosat)</span></h3>
-                            <p class="text-xs font-semibold text-teal-600 dark:text-teal-400">PT Empore Hezer Tama — Surabaya</p>
-                        </div>
-                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
-                            Agustus 2025 – Maret 2026
-                        </span>
-                    </div>
-                    <ul class="list-disc list-inside text-xs text-slate-600 dark:text-slate-300 space-y-1.5 leading-relaxed">
-                        <li>Mengelola lebih dari 150 dokumen proyek selama siklus proyek telekomunikasi Nokia & Indosat.</li>
-                        <li>Menyiapkan dokumen SIR, PR, ATP, Progress Report, dan dokumen pendukung verifikasi.</li>
-                        <li>Berkoordinasi dengan Project Manager, Engineer, QA/QC, dan Customer untuk memastikan kepatuhan standar audit.</li>
-                        <li>Mendukung proses Project Handover tanpa penundaan administrasi.</li>
-                    </ul>
-                </div>
-
-                <!-- Timeline Item 2 -->
-                <div class="relative pl-8 sm:pl-12 glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800">
-                    <div class="absolute left-1.5 sm:left-4 top-7 -translate-x-1/2 w-4 h-4 rounded-full bg-sky-500 border-4 border-white dark:border-slate-900 shadow"></div>
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                        <div>
-                            <h3 class="font-bold text-lg">Permit & Site Supervisor / Project Admin <span class="text-xs font-semibold text-slate-500">(ZTE-EMR FTTH)</span></h3>
-                            <p class="text-xs font-semibold text-teal-600 dark:text-teal-400">PT Grha Prima Agung — Blitar</p>
-                        </div>
-                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300">
-                            Desember 2023 – Februari 2025
-                        </span>
-                    </div>
-                    <ul class="list-disc list-inside text-xs text-slate-600 dark:text-slate-300 space-y-1.5 leading-relaxed">
-                        <li>Mengawasi implementasi proyek FTTH dan pekerjaan lebih dari 30 teknisi lapangan.</li>
-                        <li>Mengelola perizinan lokasi pada lebih dari 50 lokasi proyek.</li>
-                        <li>Mengikuti ATP, PAT, FAT, Site Acceptance, serta mereview As-Plan Design (APD) dan Redline Drawing.</li>
-                    </ul>
-                </div>
-
-                <!-- Timeline Item 3 -->
-                <div class="relative pl-8 sm:pl-12 glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800">
-                    <div class="absolute left-1.5 sm:left-4 top-7 -translate-x-1/2 w-4 h-4 rounded-full bg-teal-500 border-4 border-white dark:border-slate-900 shadow"></div>
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                        <div>
-                            <h3 class="font-bold text-lg">Field Network Engineer & Regional Technical Support</h3>
-                            <p class="text-xs font-semibold text-teal-600 dark:text-teal-400">PT Tangguh Mandiri Bersama (Partner PT Aplikanusa Lintasarta) — Balikpapan</p>
-                        </div>
-                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300">
-                            November 2016 – Agustus 2023
-                        </span>
-                    </div>
-                    <ul class="list-disc list-inside text-xs text-slate-600 dark:text-slate-300 space-y-1.5 leading-relaxed">
-                        <li>Instalasi, konfigurasi, commissioning, dan troubleshooting LAN/WAN, Fiber Optic, VSAT, Radio Link Microwave, dan CCTV.</li>
-                        <li>Monitoring performa jaringan dengan PRTG dan berkoordinasi dengan NOC/Service Desk untuk menjaga ketersediaan jaringan 99,5%.</li>
-                        <li>Menangani proyek customer enterprise: PT Berau Coal, PT Pertamina Hulu Kalimantan Timur (PHKT), PT Wilmar Nabati, BAKTI Kominfo, dan PT Chevron.</li>
-                    </ul>
-                </div>
-
-                <!-- Timeline Item 4 -->
-                <div class="relative pl-8 sm:pl-12 glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800">
-                    <div class="absolute left-1.5 sm:left-4 top-7 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-400 border-4 border-white dark:border-slate-900 shadow"></div>
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                        <div>
-                            <h3 class="font-bold text-lg">IT Technician & Production Staff</h3>
-                            <p class="text-xs font-semibold text-slate-500">Cahaya Multimedia & PT Indonusa Telemedia (TelkomVision) — Samarinda</p>
-                        </div>
-                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
-                            2011 – 2016
-                        </span>
-                    </div>
-                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                        Mengawali karir teknis dengan instalasi perangkat penerima komunikasi pelanggan, troubleshooting jaringan dasar, preventive maintenance berkala, serta manajemen dokumentasi aset digital.
-                    </p>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="about" class="space-y-6">
-            <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 space-y-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-2xl bg-teal-500 text-white flex items-center justify-center text-2xl font-bold shadow-lg shadow-teal-500/20">
-                        <i class="fa-solid fa-user-gear"></i>
-                    </div>
-                    <div>
-                        <span class="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">About Me</span>
-                        <h2 class="text-xl sm:text-2xl font-extrabold">Profil Ringkas & Fleksibilitas Kerja</h2>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <div class="lg:col-span-8 space-y-4 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                        <p>
-                            Saya adalah <strong>Bambang Yutriono</strong>, seorang profesional di bidang operasional jaringan telekomunikasi dan administrasi proyek dengan pengalaman lebih dari 10 tahun. Terbiasa bekerja di lingkungan operasional bertekanan tinggi seperti pertambangan batu bara, minyak & gas lepas pantai/darat, serta proyek telekomunikasi enterprise skala nasional.
-                        </p>
-                        <p>
-                            Kelebihan utama saya terletak pada kombinasi unik antara **Keahlian Teknis Lapangan** (Cisco, MikroTik, Fiber Optic Splicing, Radio Link, VSAT, CCTV) dan **Kedisiplinan Administrasi Proyek** (Document Control SIR/PR/ATP, perizinan lokasi, laporan SLA, dan koordinasi lintas divisi NOC).
-                        </p>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
-                            <div class="p-3 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center gap-3">
-                                <i class="fa-solid fa-plane-departure text-teal-500 text-lg"></i>
-                                <span>Bersedia Dinas / Relokasi Seluruh Indonesia</span>
-                            </div>
-                            <div class="p-3 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center gap-3">
-                                <i class="fa-solid fa-clock text-indigo-500 text-lg"></i>
-                                <span>Siap Kerja Shift, Standby, Roster, & On-Call</span>
-                            </div>
-                            <div class="p-3 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center gap-3">
-                                <i class="fa-solid fa-id-card text-amber-500 text-lg"></i>
-                                <span>Memiliki SIM A & SIM C Aktif</span>
-                            </div>
-                            <div class="p-3 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center gap-3">
-                                <i class="fa-solid fa-language text-sky-500 text-lg"></i>
-                                <span>Paham Dokumentasi Teknis Bahasa Inggris</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Education & Location Badge Box -->
-                    <div class="lg:col-span-4 p-6 rounded-2xl bg-slate-100/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 space-y-4 text-xs">
-                        <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100 flex items-center gap-2">
-                            <i class="fa-solid fa-graduation-cap text-teal-500"></i> Pendidikan Formal
-                        </h4>
-                        <div>
-                            <p class="font-bold">SMK Negeri 1 Doko – Blitar</p>
-                            <p class="text-slate-500">Teknik Komputer & Jaringan (2008 – 2011)</p>
-                        </div>
-                        <hr class="border-slate-200 dark:border-slate-700">
-                        <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100 flex items-center gap-2">
-                            <i class="fa-solid fa-map-pin text-rose-500"></i> Domisili Saat Ini
-                        </h4>
-                        <p class="text-slate-600 dark:text-slate-300">
-                            Balikpapan, Kalimantan Timur. Siap ditempatkan di site mana saja di seluruh wilayah Indonesia.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="space-y-6">
-            <div class="glass-card rounded-3xl p-8 sm:p-10 border border-slate-200 dark:border-slate-800 space-y-6 shadow-xl">
-                <div class="max-w-3xl space-y-3">
-                    <span class="inline-block px-3 py-1 bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300 text-xs font-bold rounded-full border border-teal-200 dark:border-teal-800">
-                        📬 Contact Information
-                    </span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold leading-tight">
-                        Hubungi & Terhubung
-                    </h2>
-                    <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                        Silakan hubungi saya untuk diskusi karir, peluang kerja profesional, maupun informasi teknis lebih lanjut.
-                    </p>
-
-                    <!-- Direct Links Bar -->
-                    <div class="flex flex-wrap gap-3 pt-3">
-                        <a href="https://wa.me/6285349989650?text=Halo%20Pak%20Bambang,%20saya%20melihat%20portfolio%20Anda%20dan%20ingin%20berdiskusi." target="_blank" class="px-6 py-3.5 rounded-2xl bg-emerald-600 text-white hover:bg-emerald-700 font-bold text-xs shadow-md flex items-center gap-2 transition-all">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            <span>WhatsApp Direct (+62 853-4998-9650)</span>
-                        </a>
-                        <a href="mailto:mas.bambang27@gmail.com" class="px-6 py-3.5 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-bold text-xs flex items-center gap-2 transition-all">
-                            <i class="fa-solid fa-envelope text-indigo-500 text-lg"></i>
-                            <span>mas.bambang27@gmail.com</span>
-                        </a>
-                        <a href="https://linkedin.com/in/bambang-yutriono" target="_blank" class="px-6 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md flex items-center gap-2 transition-all">
-                            <i class="fa-brands fa-linkedin text-lg"></i>
-                            <span>LinkedIn Profile</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Interactive Quick Contact Form Modal / Inline Box -->
-            <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 space-y-4">
-                <h3 class="font-bold text-lg flex items-center gap-2">
-                    <i class="fa-solid fa-paper-plane text-teal-500"></i> Kirim Pesan Langsung
-                </h3>
-                <form id="contact-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold mb-1">Nama Lengkap / Perusahaan</label>
-                        <input type="text" id="contact-name" placeholder="Contoh: PT Telco Indonesia" required class="w-full p-3 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-teal-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold mb-1">Topik / Posisi</label>
-                        <select id="contact-role" class="w-full p-3 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-teal-500 focus:outline-none">
-                            <option value="Network Engineer">Network Engineer</option>
-                            <option value="IT Technical Support">IT Technical Support</option>
-                            <option value="Project Admin">Project Administrator</option>
-                            <option value="Document Controller">Document Controller</option>
-                            <option value="Lainnya">Diskusi Lainnya</option>
-                        </select>
-                    </div>
-                    <div class="sm:col-span-2">
-                        <label class="block text-xs font-semibold mb-1">Pesan / Diskusi</label>
-                        <textarea id="contact-message" rows="3" placeholder="Tuliskan lokasi site, posisi, atau informasi singkat..." required class="w-full p-3 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
-                    </div>
-                    <div class="sm:col-span-2 flex justify-end">
-                        <button type="submit" class="px-8 py-3 rounded-xl bg-teal-500 hover:bg-teal-600 text-slate-950 font-bold text-xs flex items-center gap-2 transition-all">
-                            <i class="fa-brands fa-whatsapp text-sm"></i>
-                            <span>Kirimkan Pesan Ke WhatsApp Bambang</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Detail Project Modal -->
-    <div id="project-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden items-center justify-center p-4">
-        <div class="glass-card max-w-lg w-full p-6 sm:p-8 rounded-3xl space-y-4 border border-slate-200 dark:border-slate-700 shadow-2xl relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-xs font-bold hover:bg-slate-300 dark:hover:bg-slate-700">
-                ✕
-            </button>
-            <h3 id="modal-title" class="text-lg font-bold text-teal-600 dark:text-teal-400">Title</h3>
-            <p id="modal-body" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                Description detail...
+        <!-- ABOUT -->
+        <section id="about" class="glass-card">
+            <h2>About Me</h2>
+            <p style="line-height: 1.7; margin-bottom: 15px;">
+                Profesional Telecommunication, Network Infrastructure, IT Support, dan Project Operations dengan pengalaman lebih dari 10 tahun dalam implementasi, operasi, pemeliharaan, dan administrasi proyek pada sektor telekomunikasi, pertambangan, minyak & gas, industri, enterprise, dan retail.
             </p>
-            <div class="pt-4 flex justify-end">
-                <button onclick="closeModal()" class="px-5 py-2 rounded-xl bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-950 text-xs font-bold">
-                    Tutup
-                </button>
+            <p style="line-height: 1.7; margin-bottom: 15px;">
+                Berpengalaman menangani Network Engineering, IT Infrastructure, Fiber Optic, FTTH, VSAT, Radio Link, Point-to-Point Microwave, SD-WAN, CCTV, Project Administration, Document Control, serta koordinasi operasional lapangan mulai dari tahap implementasi, commissioning, maintenance, troubleshooting, hingga project handover.
+            </p>
+            <p style="line-height: 1.7;">
+                Terbiasa bekerja dalam lingkungan berorientasi SLA, berkolaborasi dengan Project Manager, Engineer, QA/QC, NOC, Service Desk, Vendor, dan Client, serta memiliki kemampuan mengintegrasikan aspek teknis dan administrasi untuk mendukung penyelesaian proyek secara efektif, tepat waktu, dan sesuai standar perusahaan.
+            </p>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience" class="glass-card">
+            <h2>Experience & Achievements</h2>
+            <div class="timeline-item">
+                <h3>Document Controller</h3>
+                <span class="company">PT Empore Hezer Tama (Nokia Inhouse - Indosat Ooredoo Hutchison)</span>
+                <span class="date">Surabaya | Agu 2025 – Mar 2026</span>
+                <ul>
+                    <li>Mengelola <span class="highlight-text">150+ dokumen proyek</span> selama siklus implementasi, verifikasi, pengendalian revisi, dan pengarsipan dokumen.</li>
+                    <li>Menyusun ATP, SIR, PR, Progress Report, dan transmittal; berkoordinasi dengan PM, Engineer, QA/QC, hingga Client.</li>
+                    <li>Mendukung kelancaran proses Project Handover melalui dokumentasi yang akurat dan sistematis.</li>
+                </ul>
             </div>
-        </div>
+            <div class="timeline-item">
+                <h3>Permit & Site Supervisor</h3>
+                <span class="company">PT Grha Prima Agung (ZTE-EMR FTTH Project)</span>
+                <span class="date">Blitar | Des 2023 – Feb 2025</span>
+                <ul>
+                    <li>Mengkoordinasikan <span class="highlight-text">30+ teknisi</span> lapangan dan mengelola administrasi perizinan <span class="highlight-text">50+ lokasi proyek</span> FTTH.</li>
+                    <li>Review As Plan Design (APD), penyusunan Redline Drawing, serta mendukung ATP/PAT/FAT/Site Acceptance/Commissioning.</li>
+                    <li>Memastikan implementasi proyek berjalan sesuai target kualitas, waktu, dan standar perusahaan.</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Field Network Engineer</h3>
+                <span class="company">PT Tangguh Mandiri Bersama (Authorized Partner Lintasarta)</span>
+                <span class="date">Balikpapan | Nov 2016 – Agu 2023</span>
+                <ul>
+                    <li>Instalasi, konfigurasi, commissioning, dan troubleshooting LAN/WAN (Cisco, MikroTik, Ubiquiti, Cambium, Ceragon), Fiber Optic, VSAT, Radio Link, dan Microwave.</li>
+                    <li><span class="highlight-text">Pencapaian:</span> Menjaga uptime 99.5%, Menyelesaikan 200+ tiket SLA, Memimpin pembangunan 2 tower 60 meter (Grounding, Lightning Protection, Radio Link).</li>
+                    <li>Berhasil menginstal dan mengaktifkan Microwave Radio Link 1.8m untuk konektivitas Chevron, serta berpartisipasi dalam pembangunan infrastruktur <strong>Program BAKTI</strong> di daerah terpencil.</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Video Editor & IT Technician</h3>
+                <span class="company">Cahaya Multimedia & PT Indonusa Telemedia (TelkomVision)</span>
+                <span class="date">Samarinda | 2011 – 2016</span>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="glass-card">
+            <h2>Portfolio Project</h2>
+            <p style="margin-bottom: 15px; opacity: 0.8;">Berikut adalah proyek-proyek besar dan pencapaian yang pernah saya tangani.</p>
+            <div class="timeline-item">
+                <h3>Project Nokia – Indosat Ooredoo Hutchison</h3>
+                <ul><li>Mengelola 150+ dokumen proyek dari verifikasi, pengendalian revisi, hingga Project Handover.</li></ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Project ZTE-EMR FTTH</h3>
+                <ul><li>Supervisi lapangan untuk 30+ teknisi dan perizinan 50+ lokasi FTTH di Blitar.</li></ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Chevron Radio Link (PT Aplikanusa Lintasarta)</h3>
+                <ul><li>Instalasi, alignment, dan aktivasi Microwave Radio Link 1.8 meter di Telkom Bontang.</li></ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Infrastruktur BAKTI Indonesia</h3>
+                <ul><li>Pembangunan infrastruktur telekomunikasi di wilayah operasional 3T (Terdepan, Terluar, Tertinggal).</li></ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Enterprise & Mining Support</h3>
+                <ul><li>Network Deployment & Maintenance untuk PT Berau Coal, Pertamina Hulu Kaltim (PHKT), Wilmar Nabati, Dharma Henwa, dan Berau Karetindo Lestari (BKL).</li></ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Freelance Project (SD-WAN & Commercial)</h3>
+                <ul><li>Instalasi perangkat SD-WAN PT Artacom di gerai Alfamart Balikpapan, Instalasi CCTV, serta troubleshooting jaringan enterprise.</li></ul>
+            </div>
+        </section>
+
+        <!-- SKILLS & CERTIFICATIONS -->
+        <section id="skills" class="glass-card">
+            <h2>Skills & Certifications</h2>
+            <div class="skills-grid" style="margin-bottom: 20px;">
+                <div class="skill-box network"><i class="fas fa-network-wired"></i> Telecommunication & Network (Cisco, MikroTik, VSAT, Fiber Optic, Radio Link)</div>
+                <div class="skill-box it"><i class="fas fa-desktop"></i> IT Infrastructure (Windows, M365, Hardware, CCTV, UPS, Solar System)</div>
+                <div class="skill-box admin"><i class="fas fa-file-signature"></i> Project Admin & Doc Control (SIR, PR, ATP, BAST, As-Built Drawing)</div>
+                <div class="skill-box tools"><i class="fas fa-tools"></i> Software Tools (MS Excel Advance, AutoCAD Basic, PRTG, PNETLab, WinBox)</div>
+            </div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Sertifikasi Profesional</h3>
+            <ul style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <li>✔️ Cisco CCNA 200-301 (2023)</li>
+                <li>✔️ MikroTik MTCNA (2021)</li>
+                <li>✔️ K3 TKBT Level 2</li>
+                <li>✔️ Work At Height (WAH)</li>
+                <li>✔️ Basic Sea Survival (BSS)</li>
+            </ul>
+        </section>
+
+        <!-- GALLERY -->
+        <section id="gallery" class="glass-card">
+            <h2>Photo Gallery</h2>
+            <p style="margin-bottom: 10px; opacity: 0.8;">Dokumentasi pekerjaan lapangan dan proyek (Ganti src gambar di bagian kode ini dengan link direct Google Drive Anda).</p>
+            <div class="carousel-container">
+                <div class="carousel-slides" id="carouselSlides">
+                    <!-- GANTI URL DI BAWAH INI DENGAN LINK DIRECT GAMBAR DARI DRIVE ANDA -->
+                    <img src="images/Proyek (1).jpeg" alt="Project 1">
+                    <img src="images/Proyek (2).jpeg" alt="Project 2">
+                    <img src="images/Proyek (3).jpeg" alt="Project 3">
+                    <img src="images/Proyek (4).jpeg" alt="Project 4">
+			<img src="images/Proyek (5).jpeg" alt="Project 5">
+<img src="images/Proyek (6).jpeg" alt="Project 6">
+<img src="images/Proyek (7).jpeg" alt="Project 7">
+<img src="images/Proyek (8).jpeg" alt="Project 8">
+<img src="images/Proyek (9).jpeg" alt="Project 9">
+<img src="images/Proyek (10).jpeg" alt="Project 10">
+                </div>
+                <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+                <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
+                <div class="dots" id="dotsContainer"></div>
+            </div>
+        </section>
+
+        <!-- DOWNLOAD CV -->
+        <section id="download" class="glass-card">
+            <h2>Download CV</h2>
+            <p style="margin-bottom: 10px; opacity: 0.8;">Pilih versi CV yang sesuai dengan kebutuhan posisi Anda.</p>
+            <!-- GANTI '#' PADA SETIAP href DENGAN LINK UNDUHAN FILE PDF ANDA (yang sudah diupload ke Google Drive) -->
+            <div class="cv-grid">
+                <a href="cv/CV_Master_Bambang.pdf" download class="cv-btn master"><i class="fas fa-download"></i> CV Master (Lengkap)</a>
+                <a href="cv/CV_BambangYutriono_Network Engineer.pdf" download class="cv-btn"><i class="fas fa-network-wired"></i> Network Engineer</a>
+                <a href="cv/CV_BambangYutriono_IT Support.pdf" download class="cv-btn"><i class="fas fa-desktop"></i> IT Support</a>
+                <a href="cv/CV_BambangYutriono_Project Administrator.pdf" download class="cv-btn"><i class="fas fa-tasks"></i> Project Admin</a>
+                <a href="cv/CV_BambangYutriono_DocumentController.pdf" download class="cv-btn"><i class="fas fa-file-alt"></i> Document Controller</a>
+                <a href="cv/CV_BambangYutriono_NetworkDeploymentEngineer.pdf" download class="cv-btn"><i class="fas fa-satellite-dish"></i> Network Deployment</a>
+            </div>
+            <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 15px;"><i class="fas fa-info-circle"></i> Untuk tautan download, unggah file PDF Anda ke Google Drive dengan akses publik, salin link file, lalu ganti tanda <code>#</code> di atas.</p>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="glass-card" style="text-align: center;">
+            <h2>Get In Touch</h2>
+            <p style="margin-bottom: 10px;">Tertarik bekerja sama? Saya siap membantu kebutuhan Network, IT Support, dan administrasi proyek Anda.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/6285349989650" target="_blank" class="cta-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="mailto:mas.bambang27@gmail.com" class="cta-btn email"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://linkedin.com/in/bambang-yutrino" target="_blank" class="cta-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+            </div>
+        </section>
     </div>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 mt-16 py-8 text-center text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto px-4 space-y-2">
-            <p>© 2026 Bambang Yutriono. Portfolio Platform — Balikpapan, Indonesia.</p>
-            <p class="text-[10px]">Network Operations • Managed Services • Regional Technical Support • Document Controller</p>
-        </div>
-    </footer>
-
+    <!-- JS FOR DARK MODE & CAROUSEL -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        // Dark Mode
+        const toggleBtn = document.getElementById('themeToggle');
+        const icon = toggleBtn.querySelector('i');
+        const htmlElement = document.documentElement;
 
-            // --- 1. Dark Mode Toggle ---
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const themeIcon = document.getElementById('theme-icon');
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            htmlElement.setAttribute('data-theme', 'dark');
+            icon.className = 'fas fa-sun';
+        }
 
-            themeToggleBtn.addEventListener('click', () => {
-                const isDark = document.documentElement.classList.toggle('dark');
-                themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-                localStorage.setItem('by_portfolio_theme', isDark ? 'dark' : 'light');
-            });
-
-            if (localStorage.getItem('by_portfolio_theme') === 'light') {
-                document.documentElement.classList.remove('dark');
-                themeIcon.className = 'fa-solid fa-moon';
+        toggleBtn.addEventListener('click', () => {
+            if (htmlElement.getAttribute('data-theme') === 'dark') {
+                htmlElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                icon.className = 'fas fa-moon';
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                icon.className = 'fas fa-sun';
             }
-
-            // --- 2. Mobile Nav Toggle ---
-            const mobileBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            mobileBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            // Close mobile menu when link clicked
-            document.querySelectorAll('#mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-            });
-
-            // --- 3. Filterable Projects ---
-            const filterBtns = document.querySelectorAll('.project-filter-btn');
-            const projectCards = document.querySelectorAll('.project-card');
-
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const filter = btn.getAttribute('data-filter');
-
-                    filterBtns.forEach(b => {
-                        b.classList.remove('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-teal-600', 'dark:text-teal-300');
-                        b.classList.add('text-slate-600', 'dark:text-slate-400');
-                    });
-
-                    btn.classList.add('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-teal-600', 'dark:text-teal-300');
-
-                    projectCards.forEach(card => {
-                        const category = card.getAttribute('data-category');
-                        if (filter === 'all' || category.includes(filter)) {
-                            card.style.display = 'flex';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
-            });
-
-            // --- 4. Interactive Contact Form Generator ---
-            const contactForm = document.getElementById('contact-form');
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = document.getElementById('contact-name').value;
-                const role = document.getElementById('contact-role').value;
-                const msg = document.getElementById('contact-message').value;
-
-                const text = `Halo Pak Bambang,%0ANama: ${encodeURIComponent(name)}%0AKebutuhan: ${encodeURIComponent(role)}%0APesan: ${encodeURIComponent(msg)}`;
-                window.open(`https://wa.me/6285349989650?text=${text}`, '_blank');
-            });
-
         });
 
-        // --- 5. Project Detail Modal Functions ---
-        function openModal(title, text) {
-            document.getElementById('modal-title').textContent = title;
-            document.getElementById('modal-body').textContent = text;
-            const modal = document.getElementById('project-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+        // Carousel Logic
+        let slideIndex = 0;
+        const slides = document.getElementById('carouselSlides');
+        const totalSlides = slides.children.length;
+        const dotsContainer = document.getElementById('dotsContainer');
+
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+        const dots = document.querySelectorAll('.dot');
+
+        function updateCarousel() {
+            slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[slideIndex].classList.add('active');
         }
 
-        function closeModal() {
-            const modal = document.getElementById('project-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+        function changeSlide(n) {
+            slideIndex = (slideIndex + n + totalSlides) % totalSlides;
+            updateCarousel();
         }
+
+        function goToSlide(n) {
+            slideIndex = n;
+            updateCarousel();
+        }
+
+        // Init
+        updateCarousel();
     </script>
-
 </body>
 </html>
